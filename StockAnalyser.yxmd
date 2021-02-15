@@ -1,0 +1,606 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.4">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>stock_orders_Achint.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="symbol" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+            <Field name="date" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+            <Field name="order_type" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+            <Field name="side" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+            <Field name="fees" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+            <Field name="quantity" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+            <Field name="average_price" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="582" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="symbol" action="GroupBy" rename="symbol" />
+            <SummarizeField field="BuyPrice" action="Sum" rename="Sum_BuyPrice" />
+            <SummarizeField field="SellPrice" action="Sum" rename="Sum_SellPrice" />
+            <SummarizeField field="OpenQuantity" action="Sum" rename="Sum_OpenQuantity" />
+            <SummarizeField field="ClosedQuantity" action="Sum" rename="Sum_ClosedQuantity" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="1050" y="30" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Engine_26692_e1302167f5ab4dc7acb87d3f3d9c5fe7_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="150" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="date" selected="True" type="Date" size="10" />
+            <SelectField field="quantity" selected="True" type="Double" size="8" />
+            <SelectField field="average_price" selected="True" type="Double" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="438" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF [side]==&quot;buy&quot; THEN [average_price] * [quantity]  ELSE 0 ENDIF " field="BuyPrice" size="8" type="Double" />
+            <FormulaField expression="IF [side]==&quot;sell&quot; THEN [average_price] * [quantity] ELSE 0 ENDIF " field="SellPrice" size="8" type="Double" />
+            <FormulaField expression="IF Contains([side], &quot;buy&quot;) THEN [quantity] ELSE 0 ENDIF" field="OpenQuantity" size="8" type="Int64" />
+            <FormulaField expression="IF Contains([side], &quot;sell&quot;) THEN [quantity] ELSE 0 ENDIF" field="ClosedQuantity" size="8" type="Int64" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>BuyPrice = IF [side]=="buy" THEN [average_price] * [quantity]  ELSE 0 ENDIF 
+Sel...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="726" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF [Sum_ClosedQuantity] &gt; 0 THEN ([Sum_SellPrice]/[Sum_ClosedQuantity]* [Sum_OpenQuantity] - [Sum_BuyPrice]/[Sum_OpenQuantity]) * [Sum_ClosedQuantity] ELSE Null() ENDIF&#xA;" field="Realized Profit (-Loss)" size="8" type="Int64" />
+            <FormulaField expression="IF [Sum_ClosedQuantity] == [Sum_OpenQuantity] THEN ([Sum_SellPrice]/[Sum_ClosedQuantity] - [Sum_BuyPrice]/[Sum_OpenQuantity]) * [Sum_ClosedQuantity] ELSE Null() ENDIF&#xA;" field="UnRealized Profit (-Loss)" size="8" type="Int64" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Realized Profit (-Loss) = IF [Sum_ClosedQuantity] &gt; 0 THEN ([Sum_SellPrice]/[Sum...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+        <Position x="846" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SortInfo locale="0">
+            <Field field="Realized Profit (-Loss)" order="Descending" />
+            <Field field="UnRealized Profit (-Loss)" order="Descending" />
+          </SortInfo>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Realized Profit (-Loss) - Descending
+UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="Insights">
+        <Position x="1062" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <InsightFields>
+            <InsightData>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Insight10\insight.sqlite|||insightdata</InsightData>
+            <InsightDescription>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Insight10\insightDescription.json</InsightDescription>
+            <Description>
+              <Elements>
+                <CHART xmlns:json="http://james.newtonking.com/projects/json" json:Array="true">
+                  <x>47</x>
+                  <y>3</y>
+                  <id>insight-0</id>
+                  <width>1558</width>
+                  <height>727</height>
+                  <type>CHART</type>
+                  <elementProps>
+                    <layout>
+                      <title />
+                      <font>
+                        <family>sans-serif</family>
+                        <size>15</size>
+                        <color>rgb(110, 79, 79)</color>
+                      </font>
+                      <autosize>false</autosize>
+                      <width>1558</width>
+                      <height>727</height>
+                      <xaxis>
+                        <range>-1.0057114559260505</range>
+                        <range>20.855827005612412</range>
+                        <autorange>false</autorange>
+                        <title>
+                          <text>symbol</text>
+                        </title>
+                        <showspikes>false</showspikes>
+                        <tickfont>
+                          <size>12</size>
+                        </tickfont>
+                        <nticks>0</nticks>
+                        <type>category</type>
+                      </xaxis>
+                      <yaxis>
+                        <range>3174.5482006493839</range>
+                        <range>26593.058031545166</range>
+                        <autorange>false</autorange>
+                        <title>
+                          <text>Profit (-Loss)</text>
+                        </title>
+                        <showspikes>false</showspikes>
+                        <type>linear</type>
+                      </yaxis>
+                      <dragmode>zoom</dragmode>
+                      <margin>
+                        <pad>21</pad>
+                        <t>100</t>
+                        <b>80</b>
+                        <l>80</l>
+                        <r>80</r>
+                      </margin>
+                      <plot_bgcolor>rgb(255, 255, 255)</plot_bgcolor>
+                      <hovermode>closest</hovermode>
+                      <barmode>group</barmode>
+                    </layout>
+                    <data json:Array="true">
+                      <type>bar</type>
+                      <mode>lines</mode>
+                      <xsrc>symbol</xsrc>
+                      <name>Profit\Symbol</name>
+                      <orientation>v</orientation>
+                      <decreasing>
+                        <line>
+                          <color>#7f7f7f</color>
+                        </line>
+                        <fillcolor>rgba(127, 127, 127, 0.5)</fillcolor>
+                      </decreasing>
+                      <increasing>
+                        <line>
+                          <color>#17becf</color>
+                        </line>
+                        <fillcolor>rgba(23, 190, 207, 0.5)</fillcolor>
+                      </increasing>
+                      <autocolorscale>false</autocolorscale>
+                      <ysrc>Profit (-Loss)</ysrc>
+                      <textposition>None</textposition>
+                      <marker>
+                        <line>
+                          <width>0</width>
+                        </line>
+                        <opacity>1</opacity>
+                        <colorsrc>Profit (-Loss)</colorsrc>
+                        <color>6601.0599999999995</color>
+                        <color>4445.1100000000006</color>
+                        <color>2382.2299999999996</color>
+                        <color>2198.0200000000004</color>
+                        <color>995.60000000000036</color>
+                        <color>946.80000000000018</color>
+                        <color>911.13749999999891</color>
+                        <color>885.75</color>
+                        <color>600</color>
+                        <color>498</color>
+                        <color>468.27999999999975</color>
+                        <color>462</color>
+                        <color>452.4</color>
+                        <color>324.10999999999967</color>
+                        <color>268.90999999999985</color>
+                        <color>264.57999999999993</color>
+                        <color>261.74999999999994</color>
+                        <color>230</color>
+                        <color>219.38000000000011</color>
+                        <color>211.60000000000036</color>
+                        <color>169.1299999999992</color>
+                        <color>165.57999999999993</color>
+                        <color>151.35999999999694</color>
+                        <color>142.49999999999955</color>
+                        <color>110</color>
+                        <color>80</color>
+                        <color>40.540000000000077</color>
+                        <color>40</color>
+                        <color>36</color>
+                        <color>34.5</color>
+                        <color>34</color>
+                        <color>28</color>
+                        <color>13.290000000000191</color>
+                        <color>13.129999999999882</color>
+                        <color>11</color>
+                        <color>7.5</color>
+                        <color>4</color>
+                        <color>3.79</color>
+                        <color>3.1099999999999</color>
+                        <color>1.0100000000002183</color>
+                        <color>0.50999999999999091</color>
+                        <color>0</color>
+                        <color>0</color>
+                        <color>-4.5</color>
+                        <color>-19.320000000000618</color>
+                        <color>-19.860000000000127</color>
+                        <color>-76.930000000000291</color>
+                        <color>-185.5</color>
+                        <color>-186.04739999999998</color>
+                        <color>-257.84999999999991</color>
+                        <color>-310.575</color>
+                        <color>-360.30000000000007</color>
+                        <color>-500</color>
+                        <color>-555.87999999999965</color>
+                        <color>-576</color>
+                        <color>-617.19000000000051</color>
+                        <color>-767.98</color>
+                        <color>-874.69999999999982</color>
+                        <color>-898.51</color>
+                        <color>-1051.1</color>
+                        <color>-1130.51</color>
+                        <color>-1148.1896000000002</color>
+                        <color>-1156</color>
+                        <color>-1185.8000000000002</color>
+                        <color>-1201.6599999999999</color>
+                        <color>-1224</color>
+                        <color>-1371.99</color>
+                        <color>-1460</color>
+                        <color>-1597.6299999999999</color>
+                        <color>-1851.7800000000002</color>
+                        <color>-1998.6100000000001</color>
+                        <color>-2130</color>
+                        <color>-2160</color>
+                        <color>-2261.88</color>
+                        <color>-3074.2574999999997</color>
+                        <color>-3306.25</color>
+                        <color>-3442.95</color>
+                        <color>-4880.49</color>
+                        <color>-6347.5</color>
+                        <color>-6840.2699999999986</color>
+                        <color>-10918.77</color>
+                        <color>-12639.079999999998</color>
+                        <reversescale>true</reversescale>
+                        <colorscale json:Array="true">
+                          <colorscale>0</colorscale>
+                          <colorscale>#f7fcf5</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.125</colorscale>
+                          <colorscale>#e5f5e0</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.25</colorscale>
+                          <colorscale>#c7e9c0</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.375</colorscale>
+                          <colorscale>#a1d99b</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.5</colorscale>
+                          <colorscale>#74c476</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.625</colorscale>
+                          <colorscale>#41ab5d</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.75</colorscale>
+                          <colorscale>#238b45</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>0.875</colorscale>
+                          <colorscale>#006d2c</colorscale>
+                        </colorscale>
+                        <colorscale json:Array="true">
+                          <colorscale>1</colorscale>
+                          <colorscale>#00441b</colorscale>
+                        </colorscale>
+                        <showscale>false</showscale>
+                        <cauto>true</cauto>
+                        <cmin>-12637</cmin>
+                        <cmax>6601</cmax>
+                      </marker>
+                    </data>
+                  </elementProps>
+                </CHART>
+              </Elements>
+              <Hierarchy>
+                <id-6uds3b035jq>
+                  <aggregationFunction>sum</aggregationFunction>
+                </id-6uds3b035jq>
+              </Hierarchy>
+              <Filters xmlns:json="http://james.newtonking.com/projects/json" json:Array="true">
+                <name>Profit (-Loss)</name>
+                <controlName>dropdown</controlName>
+                <columnName>Profit (-Loss)</columnName>
+                <type>in</type>
+              </Filters>
+            </Description>
+            <InsightGalleryID>
+            </InsightGalleryID>
+            <InsightGalleryCheckSum />
+          </InsightFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxInsightsPluginEngine.dll" EngineDllEntryPoint="AlteryxInsights" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="534" y="234" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Engine_26692_369b2786f9634fb5ba1a1685a70613ce_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="630" y="234" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Engine_26692_dd8c6479e85e48509411bce2f1e7dd35_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.RunningTotal.RunningTotal">
+        <Position x="342" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <GroupByFields>
+            <Field field="symbol" />
+          </GroupByFields>
+          <RunningTotalFields>
+            <Field field="quantity" />
+          </RunningTotalFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxRunningTotal" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+        <Position x="246" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SortInfo locale="0">
+            <Field field="date" order="Ascending" />
+          </SortInfo>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>date - Ascending</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>StockAnalyser</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

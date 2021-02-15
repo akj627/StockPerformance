@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.4">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="42" y="42" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>option_orders_Feb-01-2021.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="chain_symbol" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="expiration_date" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="strike_price" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="option_type" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="side" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="order_created_at" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="direction" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="order_quantity" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="order_type" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="opening_strategy" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="closing_strategy" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="price" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+            <Field name="processed_quantity" size="254" source="File: C:\Practice\python\order_history - Alteryx\option_orders_Feb-01-2021.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="438" y="42" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_68664_1defd210f7494e14b4b177ab9ac243b1_\Engine_28124_7148d70b97744b8490b2fe31173afbc0_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="294" y="42" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="chain_symbol" action="GroupBy" rename="chain_symbol" />
+            <SummarizeField field="expiration_date" action="GroupBy" rename="expiration_date" />
+            <SummarizeField field="strike_price" action="GroupBy" rename="strike_price" />
+            <SummarizeField field="option_type" action="GroupBy" rename="option_type" />
+            <SummarizeField field="order_created_at" action="GroupBy" rename="order_created_at" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>OptionAnalyser</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
