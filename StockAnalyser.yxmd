@@ -3,7 +3,7 @@
   <Nodes>
     <Node ToolID="1">
       <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
-        <Position x="54" y="78" />
+        <Position x="54" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -27,9 +27,6 @@
           <DefaultAnnotationText>stock_orders_Achint.csv</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
-        <Dependencies>
-          <Implicit />
-        </Dependencies>
         <MetaInfo connection="Output">
           <RecordInfo>
             <Field name="symbol" size="254" source="File: C:\Practice\python\order_history - Alteryx\stock_orders_Achint.csv" type="V_String" />
@@ -46,7 +43,7 @@
     </Node>
     <Node ToolID="2">
       <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
-        <Position x="582" y="78" />
+        <Position x="678" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -68,11 +65,11 @@
     </Node>
     <Node ToolID="3">
       <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
-        <Position x="1050" y="30" />
+        <Position x="1110" y="54" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Engine_26692_e1302167f5ab4dc7acb87d3f3d9c5fe7_.yxdb</TempFile>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_20688_057a031e2516425eac945f346706ce6c_\Engine_14272_0cf17a43942441c78d4047392a5a21f6_.yxdb</TempFile>
           <TempFileDataProfiling />
           <Layout>
             <ViewMode>Single</ViewMode>
@@ -96,7 +93,7 @@
     </Node>
     <Node ToolID="6">
       <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
-        <Position x="150" y="78" />
+        <Position x="150" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -119,7 +116,7 @@
     </Node>
     <Node ToolID="7">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="438" y="78" />
+        <Position x="534" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -141,18 +138,18 @@ Sel...</DefaultAnnotationText>
     </Node>
     <Node ToolID="8">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
-        <Position x="726" y="78" />
+        <Position x="918" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <FormulaFields>
-            <FormulaField expression="IF [Sum_ClosedQuantity] &gt; 0 THEN ([Sum_SellPrice]/[Sum_ClosedQuantity]* [Sum_OpenQuantity] - [Sum_BuyPrice]/[Sum_OpenQuantity]) * [Sum_ClosedQuantity] ELSE Null() ENDIF&#xA;" field="Realized Profit (-Loss)" size="8" type="Int64" />
-            <FormulaField expression="IF [Sum_ClosedQuantity] == [Sum_OpenQuantity] THEN ([Sum_SellPrice]/[Sum_ClosedQuantity] - [Sum_BuyPrice]/[Sum_OpenQuantity]) * [Sum_ClosedQuantity] ELSE Null() ENDIF&#xA;" field="UnRealized Profit (-Loss)" size="8" type="Int64" />
+            <FormulaField expression="IF ([Sum_ClosedQuantity] &gt; 0 AND [Sum_OpenQuantity] &gt; 0) &#xA;THEN (([Sum_SellPrice]/[Sum_ClosedQuantity] - [Sum_BuyPrice]/[Sum_OpenQuantity])*[Sum_ClosedQuantity]) &#xA;ELSE Null() ENDIF&#xA;" field="Realized Profit (-Loss)" size="8" type="Int64" />
+            <FormulaField expression="IF ([Sum_ClosedQuantity] &gt; 0 AND [Sum_OpenQuantity] &gt; 0) &#xA;THEN (([Sum_SellPrice]/[Sum_ClosedQuantity] - [Sum_BuyPrice]/[Sum_OpenQuantity])*[Sum_ClosedQuantity]) &#xA;ELSE Null() ENDIF&#xA;" field="UnRealized Profit (-Loss)" size="8" type="Int64" />
           </FormulaFields>
         </Configuration>
         <Annotation DisplayMode="0">
           <Name />
-          <DefaultAnnotationText>Realized Profit (-Loss) = IF [Sum_ClosedQuantity] &gt; 0 THEN ([Sum_SellPrice]/[Sum...</DefaultAnnotationText>
+          <DefaultAnnotationText>Realized Profit (-Loss) = IF ([Sum_ClosedQuantity] &gt; 0 AND [Sum_OpenQuantity] &gt; ...</DefaultAnnotationText>
           <Left value="False" />
         </Annotation>
       </Properties>
@@ -160,7 +157,7 @@ Sel...</DefaultAnnotationText>
     </Node>
     <Node ToolID="9">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
-        <Position x="846" y="78" />
+        <Position x="1014" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -180,13 +177,13 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Node>
     <Node ToolID="10">
       <GuiSettings Plugin="Insights">
-        <Position x="1062" y="162" />
+        <Position x="1110" y="186" />
       </GuiSettings>
       <Properties>
         <Configuration>
           <InsightFields>
-            <InsightData>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Insight10\insight.sqlite|||insightdata</InsightData>
-            <InsightDescription>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Insight10\insightDescription.json</InsightDescription>
+            <InsightData>C:\Users\ajha\AppData\Local\Temp\Engine_20688_057a031e2516425eac945f346706ce6c_\Insight10\insight.sqlite|||insightdata</InsightData>
+            <InsightDescription>C:\Users\ajha\AppData\Local\Temp\Engine_20688_057a031e2516425eac945f346706ce6c_\Insight10\insightDescription.json</InsightDescription>
             <Description>
               <Elements>
                 <CHART xmlns:json="http://james.newtonking.com/projects/json" json:Array="true">
@@ -425,11 +422,11 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Node>
     <Node ToolID="11">
       <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
-        <Position x="534" y="234" />
+        <Position x="630" y="258" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Engine_26692_369b2786f9634fb5ba1a1685a70613ce_.yxdb</TempFile>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_20688_057a031e2516425eac945f346706ce6c_\Engine_14272_67957fd7d06942cc9e851d6ff9503487_.yxdb</TempFile>
           <TempFileDataProfiling />
           <Layout>
             <ViewMode>Single</ViewMode>
@@ -453,11 +450,11 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Node>
     <Node ToolID="12">
       <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
-        <Position x="630" y="234" />
+        <Position x="822" y="258" />
       </GuiSettings>
       <Properties>
         <Configuration>
-          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_16628_ac3e0ec62cb649bd96f53a2552ba451c_\Engine_26692_dd8c6479e85e48509411bce2f1e7dd35_.yxdb</TempFile>
+          <TempFile>C:\Users\ajha\AppData\Local\Temp\Engine_20688_057a031e2516425eac945f346706ce6c_\Engine_14272_0de529f616d742c79a30162bf3b4cd9c_.yxdb</TempFile>
           <TempFileDataProfiling />
           <Layout>
             <ViewMode>Single</ViewMode>
@@ -481,7 +478,7 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Node>
     <Node ToolID="13">
       <GuiSettings Plugin="AlteryxBasePluginsGui.RunningTotal.RunningTotal">
-        <Position x="342" y="78" />
+        <Position x="438" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -502,7 +499,7 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Node>
     <Node ToolID="14">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
-        <Position x="246" y="78" />
+        <Position x="234" y="102" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -518,6 +515,23 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
       </Properties>
       <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
     </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="822" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[Sum_BuyPrice] != 0 And [Sum_SellPrice] != 0</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[Sum_BuyPrice] != 0 And [Sum_SellPrice] != 0</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
   </Nodes>
   <Connections>
     <Connection>
@@ -526,11 +540,11 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Connection>
     <Connection>
       <Origin ToolID="2" Connection="Output" />
-      <Destination ToolID="8" Connection="Input" />
+      <Destination ToolID="12" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="2" Connection="Output" />
-      <Destination ToolID="12" Connection="Input" />
+      <Destination ToolID="18" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="6" Connection="Output" />
@@ -538,11 +552,11 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     </Connection>
     <Connection>
       <Origin ToolID="7" Connection="Output" />
-      <Destination ToolID="2" Connection="Input" />
+      <Destination ToolID="11" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="7" Connection="Output" />
-      <Destination ToolID="11" Connection="Input" />
+      <Destination ToolID="2" Connection="Input" />
     </Connection>
     <Connection>
       <Origin ToolID="8" Connection="Output" />
@@ -563,6 +577,10 @@ UnRealized Profit (-Loss) - Descending</DefaultAnnotationText>
     <Connection>
       <Origin ToolID="14" Connection="Output" />
       <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="True" />
+      <Destination ToolID="8" Connection="Input" />
     </Connection>
   </Connections>
   <Properties>
